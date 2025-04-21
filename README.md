@@ -1,3 +1,3 @@
-# LLM Paramters
+# LLM Parameters
 
-An ilustration of the paramters used in LLMs
+An illustration of the parameters used in LLMs
