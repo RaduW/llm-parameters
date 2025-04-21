@@ -1,0 +1,12 @@
+[project]
+name = "llm-parameters"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "marimo>=0.13.0",
+    "matplotlib>=3.10.1",
+    "numpy>=2.2.5",
+    "polars>=1.27.1",
+]
