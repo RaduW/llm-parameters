@@ -8,4 +8,4 @@ This is inspired by [ritvikmath's](https://www.youtube.com/@ritvikmath)  excelle
 
 
 
-[Here's the link to the notebook](index.html)
+[Here's the link to the notebook](https://raduw.github.io/llm-parameters/)
