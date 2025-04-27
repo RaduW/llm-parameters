@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        resizeObserver.observe(obj.contentWindow.document.body);
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <marimo-mode data-mode='read' hidden></marimo-mode>
+    <marimo-version data-version='0.13.0' hidden></marimo-version>
+    <marimo-user-config data-config='{"completion": {"activate_on_typing": true, "copilot": false}, "display": {"default_width": "medium", "default_table_page_size": 10, "dataframes": "rich", "code_editor_font_size": 14, "theme": "light", "cell_output": "above"}, "formatting": {"line_length": 79}, "keymap": {"preset": "default", "overrides": {}}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "reactive_tests": true, "on_cell_change": "autorun", "watcher_on_save": "lazy", "output_max_bytes": 8000000, "std_stream_max_bytes": 1000000}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "package_management": {"manager": "pip"}, "server": {"browser": "default", "follow_symlink": false}, "language_servers": {"pylsp": {"enabled": true, "enable_mypy": true, "enable_ruff": true, "enable_flake8": false, "enable_pydocstyle": false, "enable_pylint": false, "enable_pyflakes": false}}, "snippets": {"custom_paths": [], "include_default_snippets": true}}' data-overrides='{}' hidden></marimo-user-config>
+    <marimo-app-config data-config='{"width": "medium", "sql_output": "auto"}' hidden></marimo-app-config>
+    <marimo-server-token data-token='123' hidden></marimo-server-token>
+    <title>main</title>
+    <script type="module" crossorigin src="./assets/index-B2CDK72T.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CsvvdqXP.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="" data-show-code="false">import%20marimo%0A%0A__generated_with%20%3D%20%220.13.0%22%0Aapp%20%3D%20marimo.App(width%3D%22medium%22)%0A%0A%0A%40app.cell%0Adef%20imports()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20import%20numpy%20as%20np%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%20%20%20%20import%20polars%20as%20pl%0A%0A%20%20%20%20return%20mo%2C%20np%2C%20plt%0A%0A%0A%40app.cell%0Adef%20softmax_description(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%20%20%20%20%23%20LLM%20adjustment%20parameters%0A%20%20%20%20%20%20%20%20%23%23%20SoftMax%0A%0A%20%20%20%20%20%20%20%20We%20define%20%24softmax%24%20for%20a%20vector%20%24x%20%5Cin%20%5CRe%5Ek%24%20as%3A%0A%0A%20%20%20%20%20%20%20%20%24%24%0A%20%20%20%20%20%20%20%20softmax(x_i)%3D%20p_i%3D%20%5Cfrac%7Be%5Ex%7D%7B%5Csum_%7Bj%3D1%7D%5E%7Bk%7De%5E%7Bx_j%7D%7D%0A%20%20%20%20%20%20%20%20%24%24%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20temperature_definition(mo%2C%20temperature_slider)%3A%0A%20%20%20%20t%3Dtemperature_slider.value%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20rf%22%22%22%0A%20%20%20%20%20%20%20%20%23%23%20Temperature%0A%20%20%20%20%20%20%20%20We%20introduce%20tempaerature%20with%20the%20following%20formula%3A%0A%0A%20%20%20%20%20%20%20%20%24%24%0A%20%20%20%20%20%20%20%20p_i(T)%3D%20%5Cfrac%7B%7Be%5E%7B%7Bx_i%20%5Cover%20T%7D%7D%7D%7D%7B%7B%5Csum_%7B%7Bj%3D1%7D%7D%5E%7B%7Bk%7D%7De%5E%7B%7Bx_j%20%5Cover%20T%7D%7D%7D%7D%0A%20%20%20%20%20%20%20%20%24%24%0A%20%20%20%20%22%22%22%2Brf%22%22%22%0A%20%20%20%20%20%20%20%20So%20for%20T%3D%7Bt%3A0.3%7D%0A%0A%20%20%20%20%20%20%20%20%24%24%0A%20%20%20%20%20%20%20%20p_i(%7Bt%3A0.3%7D)%3D%20%5Cfrac%7B%7Be%5E%7B%7Bx_i%5Cover%20%7Bt%3A0.3%7D%7D%7D%7D%7D%7B%7B%5Csum_%7B%7Bj%3D1%7D%7D%5E%7B%7Bk%7D%7De%5E%7B%7Bx_j%20%5Cover%20%7Bt%3A0.3%7D%7D%7D%7D%7D%0A%20%20%20%20%20%20%20%20%24%24%0A%0A%20%20%20%20%20%20%20%20The%20logits%20are%3A%0A%20%20%20%20%20%20%20%20%22%22%22%0A%0A%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20temperature_logits(np)%3A%0A%20%20%20%20_min%20%3D%20-4%0A%20%20%20%20_max%20%3D%204%0A%20%20%20%20_temperature_num_options%20%3D%2020%0A%20%20%20%20rng%20%3D%20np.random.default_rng(seed%3D12345)%0A%20%20%20%20logits%20%3D%20(_max%20-%20_min)%20*%20rng.random(_temperature_num_options)%20%2B%20_min%0A%20%20%20%20logits%0A%20%20%20%20return%20logits%2C%20rng%0A%0A%0A%40app.cell%0Adef%20temperature_slider(mo%2C%20np)%3A%0A%20%20%20%20temperature_slider%20%3D%20mo.ui.slider(steps%3Dnp.logspace(-1%2C%201%2C%2041)%2C%20label%3D%22Temperature%22%2C%20full_width%3DTrue%2C%20value%3D1)%0A%20%20%20%20return%20(temperature_slider%2C)%0A%0A%0A%40app.cell%0Adef%20_(np)%3A%0A%20%20%20%20def%20soft_max(x%2C%20temp%3D1)%3A%0A%20%20%20%20%20%20%20%20ps%20%3D%20np.exp(x%2Ftemp)%0A%20%20%20%20%20%20%20%20ps%20%2F%3D%20np.sum(ps)%0A%20%20%20%20%20%20%20%20return%20ps%0A%0A%20%20%20%20return%20(soft_max%2C)%0A%0A%0A%40app.cell%0Adef%20temperature_ui(mo%2C%20temperature_slider)%3A%0A%20%20%20%20mo.hstack(%5Btemperature_slider%2C%20mo.md(f%22Has%20value%3A%20%7Btemperature_slider.value%3A0.2f%7D%22)%5D)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20temperature_graph(logits%2C%20np%2C%20plt%2C%20soft_max%2C%20temperature_slider)%3A%0A%20%20%20%20def%20draw_distribution(logits%2C%20t%3D1)%3A%0A%20%20%20%20%20%20%20%20%23%20Indices%20for%20the%20x-axis%20(e.g.%2C%200%2C%201%2C%202%2C%203%2C%204)%0A%20%20%20%20%20%20%20%20distribution%20%3D%20soft_max(logits%2Ct)%0A%20%20%20%20%20%20%20%20x%20%3D%20np.arange(len(distribution))%0A%20%20%20%20%20%20%20%20%23%20Create%20a%20figure%20and%20axes%0A%20%20%20%20%20%20%20%20fig%2C%20axs%3D%20plt.subplots(1%2C2%2C%20figsize%3D(15%2C%205))%0A%0A%20%20%20%20%20%20%20%20for%20idx%20%2C%20ax%20in%20enumerate(axs)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Plot%20using%20stem%0A%20%20%20%20%20%20%20%20%20%20%20%20markerline%2C%20stemlines%2C%20baseline%20%3D%20ax.stem(x%2C%20distribution)%0A%20%20%20%20%20%20%20%20%20%20%20%20plt.setp(markerline%2C%20markersize%3D8)%0A%20%20%20%20%20%20%20%20%20%20%20%20plt.setp(stemlines%2C%20linewidth%3D2)%0A%20%20%20%20%20%20%20%20%20%20%20%20baseline.set_visible(False)%0A%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Only%20horizontal%20grid%20lines%0A%20%20%20%20%20%20%20%20%20%20%20%20ax.grid(True%2C%20which%3D%22both%22%2C%20axis%3D'y')%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Remove%20x-axis%20ticks%20and%20label%0A%20%20%20%20%20%20%20%20%20%20%20%20ax.set_xticks(%5B%5D)%20%20%20%20%23%20no%20ticks%0A%20%20%20%20%20%20%20%20%20%20%20%20ax.set_xlabel('')%20%20%20%20%23%20no%20label%0A%0A%20%20%20%20%20%20%20%20%23%20Y-axis%20label%20and%20title%0A%20%20%20%20%20%20%20%20ax.set_title('Distribution%20')%0A%20%20%20%20%20%20%20%20axs%5B0%5D.set_ylabel('Probability%20(log%20scale)')%0A%20%20%20%20%20%20%20%20axs%5B1%5D.set_ylabel('Probability')%0A%20%20%20%20%20%20%20%20%23%20Set%20log%20scale%20for%20y-axis%0A%20%20%20%20%20%20%20%20axs%5B0%5D.set_yscale('log')%0A%20%20%20%20%20%20%20%20return%20fig%2Caxs%0A%0A%20%20%20%20_fig%2C%20_axs%20%3D%20draw_distribution(logits%2C%20temperature_slider.value)%0A%0A%20%20%20%20_fig%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo%2C%20rng)%3A%0A%20%20%20%20top_p%20%3D%20mo.ui.slider(start%3D0%2C%20stop%3D1%2C%20step%3D0.01%2C%20label%3D%22Top%20P%22%2C%20full_width%3DTrue%2C%20value%3D1)%0A%20%20%20%20_num_samples%20%3D%2020%0A%20%20%20%20top_p_dist%20%3D%20rng.random(_num_samples)%0A%20%20%20%20return%20top_p%2C%20top_p_dist%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20top_p_graph(mo%2C%20top_p)%3A%0A%20%20%20%20_description%20%3D%20mo.md(%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%23%23%20Top%20P%20(nucleus)%20sampling%0A%0A%20%20%20%20%20%20%20%20Sum%20the%20top%20most%20likely%20outcomes%20until%20you%20get%20to%20P.%0A%0A%20%20%20%20%20%20%20%20If%20you%20take%20top%200%20...%20you%20sample%20just%20the%20most%20probable%0A%0A%20%20%20%20%20%20%20%20If%20you%20take%20top%201%20...%20you%20sample%20from%20all%20probabilites%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%0A%20%20%20%20_slider%20%3D%20mo.hstack(%5Btop_p%2C%20mo.md(f%22Has%20value%3A%20%7Btop_p.value%3A0.2f%7D%22)%5D)%0A%0A%20%20%20%20mo.vstack(%5B_description%2C%20_slider%5D)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(np%2C%20plt%2C%20top_p%2C%20top_p_dist)%3A%0A%0A%0A%20%20%20%20_dist%20%3D%20top_p_dist%20%2F%20top_p_dist.sum()%0A%20%20%20%20def%20to_top_p(%20dist%2C%20p%3D1)%3A%0A%20%20%20%20%20%20%20%20pairs%20%3D%20%7Bx%20for%20x%20in%20enumerate(dist)%7D%0A%20%20%20%20%20%20%20%20sort_by_prob%20%3D%20sorted(pairs%2C%20key%20%3D%20lambda%20pair%3A%20-pair%5B1%5D)%0A%20%20%20%20%20%20%20%20new_probs%20%3D%20np.zeros(len(dist)%2C%20dtype%3Dnp.float64)%0A%20%20%20%20%20%20%20%20sum%20%3D%20sort_by_prob%5B0%5D%5B1%5D%0A%20%20%20%20%20%20%20%20new_probs%5Bsort_by_prob%5B0%5D%5B0%5D%5D%3Dsum%0A%20%20%20%20%20%20%20%20for%20pos%2C%20prob%20in%20sort_by_prob%5B1%3A%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20sum%20%2B%20prob%20%3C%20p%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20new_probs%5Bpos%5D%20%3D%20prob%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20sum%20%2B%3D%20prob%0A%20%20%20%20%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break%0A%20%20%20%20%20%20%20%20return%20new_probs%20%2F%20new_probs.sum()%0A%0A%20%20%20%20def%20draw_top_p(distribution%2C%20p%3D1)%3A%0A%20%20%20%20%20%20%20%20fig%2C%20axs%3D%20plt.subplots(1%2C2%2C%20figsize%3D(15%2C%205))%0A%20%20%20%20%20%20%20%20x%20%3D%20np.arange(len(distribution))%20%20%20%20%0A%20%20%20%20%20%20%20%20for%20idx%20in%20%5B0%2C1%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20ax%20%3D%20axs%5Bidx%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20idx%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dist%20%3D%20distribution%0A%20%20%20%20%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dist%20%3D%20to_top_p(distribution%2Cp)%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Plot%20using%20stem%0A%20%20%20%20%20%20%20%20%20%20%20%20markerline%2C%20stemlines%2C%20baseline%20%3D%20ax.stem(x%2C%20dist)%0A%20%20%20%20%20%20%20%20%20%20%20%20plt.setp(markerline%2C%20markersize%3D8)%0A%20%20%20%20%20%20%20%20%20%20%20%20plt.setp(stemlines%2C%20linewidth%3D2)%0A%20%20%20%20%20%20%20%20%20%20%20%20baseline.set_visible(False)%0A%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Only%20horizontal%20grid%20lines%0A%20%20%20%20%20%20%20%20%20%20%20%20ax.grid(True%2C%20which%3D%22both%22%2C%20axis%3D'y')%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Remove%20x-axis%20ticks%20and%20label%0A%20%20%20%20%20%20%20%20%20%20%20%20ax.set_xticks(%5B%5D)%20%20%20%20%23%20no%20ticks%0A%20%20%20%20%20%20%20%20%20%20%20%20ax.set_xlabel('')%20%20%20%20%23%20no%20label%0A%20%20%20%20%20%20%20%20%20%20%20%20ax.set_ylabel(%22Probability%22)%0A%0A%20%20%20%20%20%20%20%20%23%20Y-axis%20label%20and%20title%0A%20%20%20%20%20%20%20%20axs%5B0%5D.set_title('Initial%20Distribution')%0A%20%20%20%20%20%20%20%20axs%5B1%5D.set_title(f'Distribution%20Top%20P%3D%7Btop_p.value%7D')%0A%20%20%20%20%20%20%20%20%23%20Set%20log%20scale%20for%20y-axis%0A%0A%20%20%20%20%20%20%20%20return%20axs%5B0%5D%0A%20%20%20%20draw_top_p(%20_dist%2C%20top_p.value)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20pentalty_description(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%20%20%20%20%23%23%20Frequency%20and%20Presence%20Penalty%0A%0A%20%20%20%20%20%20%20%20Logit%20adjustment%3A%0A%0A%20%20%20%20%20%20%20%20%24%24%0A%20%20%20%20%20%20%20%20z_i%5E%5Cprime%20%3D%20z_i%20-%20(ppenalty%20%5Ctimes%20p_i)%20-(fpentalty%20%5Ctimes%20f_i)%0A%20%20%20%20%20%20%20%20%24%24%0A%0A%20%20%20%20%20%20%20%20where%3A%0A%0A%20%20%20%20%20%20%20%20-%20%24p_i%24%20is%20%240%24%20if%20the%20token%20has%20not%20been%20already%20seen%20and%20%241%24%20otherwise.%0A%20%20%20%20%20%20%20%20-%20%24f_i%24%20is%20the%20number%20of%20times%20token%20%24i%24%20has%20already%20been%20seen%20in%20the%20output.%0A%20%20%20%20%20%20%20%20-%20%24ppenalty%24%20is%20the%20presence%20penalty%20%24%5B-2%2C2%5D%24.%0A%20%20%20%20%20%20%20%20-%20%24fpenalty%24%20is%20the%20frequency%20penalty%20%24%5B-2%2C2%5D%24.%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
