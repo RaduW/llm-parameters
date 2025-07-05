@@ -9,4 +9,5 @@ dependencies = [
     "matplotlib>=3.10.1",
     "numpy>=2.2.5",
     "polars>=1.27.1",
+    "xkcd>=2.4.2",
 ]

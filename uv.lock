@@ -220,6 +220,7 @@ dependencies = [
     { name = "matplotlib" },
     { name = "numpy" },
     { name = "polars" },
+    { name = "xkcd" },
 ]
 
 [package.metadata]
@@ -228,6 +229,7 @@ requires-dist = [
     { name = "matplotlib", specifier = ">=3.10.1" },
     { name = "numpy", specifier = ">=2.2.5" },
     { name = "polars", specifier = ">=1.27.1" },
+    { name = "xkcd", specifier = ">=2.4.2" },
 ]
 
 [[package]]
@@ -653,3 +655,9 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/1b/6c/c65773d6cab416a64d191d6ee8a8b1c68a09970ea6909d16965d26bfed1e/websockets-15.0.1-cp313-cp313-win_amd64.whl", hash = "sha256:e09473f095a819042ecb2ab9465aee615bd9c2028e4ef7d933600a8401c79561", size = 176837 },
     { url = "https://files.pythonhosted.org/packages/fa/a8/5b41e0da817d64113292ab1f8247140aac61cbf6cfd085d6a0fa77f4984f/websockets-15.0.1-py3-none-any.whl", hash = "sha256:f7a866fbc1e97b5c617ee4116daaa09b722101d4a3c170c787450ba409f9736f", size = 169743 },
 ]
+
+[[package]]
+name = "xkcd"
+version = "2.4.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/f8/dc/8e9824517b9fbc42f6d95a1a5d345c6b9e6dd885ec3a301953ac7c2fb4d3/xkcd-2.4.2.tar.gz", hash = "sha256:180cee51fd1733288448cd8551e36680b14811003287fe9ccf61888538dd0970", size = 10110 }
