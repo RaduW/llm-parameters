@@ -9,3 +9,14 @@ This is inspired by [ritvikmath's](https://www.youtube.com/@ritvikmath)  excelle
 
 
 [Here's the link to the notebook](https://raduw.github.io/llm-parameters/)
+
+
+# Site generation
+
+To generate the site, run the following command:
+
+```bash
+marimo export html-wasm notebook.py -o docs/index.html
+marimo export html-wasm notebook.py -o docs/index.html
+
+```
