@@ -17,7 +17,6 @@ To generate the site, run the following command:
 
 ```zsh
 marimo export html-wasm notebook.py -o docs/index.html
-marimo export html-wasm notebook.py -o docs/index.html
 ```
 
 To run the notebook locally using python, use the following command:
